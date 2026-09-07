@@ -103,6 +103,11 @@ article.q .cat{margin-top:0}
 .lines li:nth-child(n+10)::before{content:counter(line)}
 .video{background:var(--lime);padding:12px;margin-top:10px}
 .video iframe{display:block;width:100%;aspect-ratio:4/3;border:0;background:var(--cream-ink)}
+.facts{display:flex;flex-direction:column}
+.facts li{padding:9px 0;border-top:1px solid var(--cream-rule);line-height:1.45}
+.facts li:last-child{border-bottom:1px solid var(--cream-rule)}
+.video video{display:block;width:100%;aspect-ratio:16/9;background:var(--cream-ink)}
+.cap{font-size:14px;line-height:1.45;color:var(--cream-ink2);margin-top:10px}
 .links{display:flex;flex-direction:column}
 .links li{padding:10px 0;border-top:1px solid var(--cream-rule);font-size:15px}
 .links li:last-child{border-bottom:1px solid var(--cream-rule)}
@@ -179,12 +184,32 @@ article.q .cat{margin-top:0}
 </section>
 <div class="cell ground part" id="part-1"><span class="cat">Part 1</span><h2 class="display">What you&#x27;ve actually built</h2></div>
 <article class="cell q" id="q1"><span class="cat">Question 01</span><h3 class="title">The biggest thing you&#x27;ve built with AI</h3><div class="a">
-<p>Sidecar was working on a feature called Trace which was generating Million Dollar for the company. The problem was freight forwarder pricing desk runs on email one shipment = dozens of emails across several mailboxes, threads, people. Subjects mutate, threads get reused, identifiers arrive late or never. Nobody has the whole story of a shipment in one place. Handlers dig the email agent has no memory of what already happened on that deal. Trace is one typed narrative pre shipment rebuilt from that mess. Two consumers the email agent (as its memory of the shipment) and the eval system as ground truth for grading the agent.</p>
-<p>Every inbound and outbound email via nylas webhook across all mailboxes at a tenant level with attachments as well PDF, CSV etc.</p>
-<p>First resolve which emails belong together, reply chains, shipment ids subject rules, fetch metadata batch wise, pre classify 60% of message by rule, build complete evidence board. Then a bounded model call judges the board what belongs to what the shipment state is Prompt forbids discovery it can only judge what&#x27;s on the board hard budgets on toll calls and token enforcement in code by scaffolding in agent harness in using open ai agent sdk. Then format the typed record save via strict typed check run ends when save commit.</p>
-<p>One record per shipment timeline, parties, cargo, ports, status, with every claim citing the email it came from Under 150 words of narrative memory the agent reads before it acts 25k generation runs a week at 98.4% success 27.5k+ live shipment records new records created on the live path with zero LLM calls. Incremental update median 8.4 s, 94% of that is the model.96% of attachable mail attached within five minutes $0.11 per record.</p>
-<p class="vlabel">What happened after launch</p>
-<p>AI agent searching the conversation graph got 16.7% of messages at $2–4 per record, 25–45 turns. Root cause from the traces it spent its budget navigating, not judging rebuilt so code does discovery and the model only judges  complete recall 12 turns $0.11.91.9% of a week&#x27;s cost was one behaviour records being re-saved repeatedly One record saved 56 times21% of customer requests were silently never traced Nobody had asked for a completeness program the grader was wrong a per-item judge scored 89 of 91 confirmed duplicates as correct because each looked fine on its own Label audit corrected 159 of 490 ground truth labels</p>
+<p>Sidecar's customers are freight forwarders, and their pricing desks run on email. One shipment is dozens of emails across several mailboxes, threads and people. Subjects get rewritten, threads get reused, and the shipment reference arrives late or never. Nobody has the whole story of a shipment in one place. Handlers dig for it, and the email agent had no memory of what had already happened on that deal.</p>
+<p>Trace was the million-dollar feature for the company: one typed record per shipment, rebuilt from that mess. Two things read it. The email agent reads it as its memory of the shipment before it acts. The eval system reads it as ground truth for grading the agent.</p>
+<p class="vlabel">What goes in</p>
+<p>Every inbound and outbound email across all of a tenant's mailboxes, through Nylas webhooks, with the attachments: PDF, CSV and the rest.</p>
+<p class="vlabel">What happens in the middle</p>
+<p>Code does the discovery first. It works out which emails belong together from reply chains, shipment IDs and subject rules, fetches metadata in batches, pre-classifies about 60% of messages by rule, and builds a complete evidence board. Then one bounded model call judges the board: which emails belong to which shipment, and what state the shipment is in. The prompt forbids discovery, so the model can only judge what is on the board. Tool calls and tokens have hard budgets enforced in code, in an agent harness built on the OpenAI Agents SDK. The result is written into the typed record through a strict type check, and the run ends when the save commits.</p>
+<p class="vlabel">What comes out</p>
+<p>One record per shipment: timeline, parties, cargo, ports and status, with every claim citing the email it came from. On top of it, a narrative memory under 150 words that the agent reads before it acts.</p>
+<p class="vlabel">What it does today</p>
+<ul class="facts">
+<li>25k generation runs a week at 98.4% success.</li>
+<li>27.5k+ live shipment records. New records on the live path are created with zero LLM calls.</li>
+<li>Incremental update median 8.4 s, and 94% of that is the model.</li>
+<li>96% of attachable mail attached within five minutes.</li>
+<li>$0.11 per record.</li>
+</ul>
+<p class="vlabel">What happened after launch that I didn't expect</p>
+<ul class="facts">
+<li>The first version let an AI agent search the conversation graph. It found 16.7% of messages, at $2 to $4 per record, in 25 to 45 turns. The traces showed it spent its budget navigating, not judging. We rebuilt it so code does discovery and the model only judges: complete recall, 12 turns, $0.11 a record.</li>
+<li>91.9% of one week's cost was a single behaviour: records being re-saved again and again. One record was saved 56 times.</li>
+<li>21% of customer requests were silently never traced. Nobody had asked for a completeness program, so nobody was measuring it.</li>
+<li>The grader was wrong. A per-item judge scored 89 of 91 confirmed duplicates as correct, because each one looked fine on its own. A label audit corrected 159 of 490 ground-truth labels.</li>
+</ul>
+<p class="vlabel">Trace in the product</p>
+<div class="video"><video controls playsinline preload="metadata" poster="assets/trace-poster.jpg"><source src="assets/trace.mp4" type="video/mp4">Your browser cannot play this video.</video></div>
+<p class="cap">Sidecar product clip, 30 seconds, no narration. An enquiry arrives on WhatsApp, becomes a shipment record matched to the right customer, runs the same pipeline as the email RFQs, and the agents for the lane are picked from memory. Nothing is sent until the handler approves.</p>
 </div><span class="meta">01 / 18</span></article>
 <article class="cell q" id="q2"><span class="cat">Question 02</span><h3 class="title">How do you know it&#x27;s right?</h3><div class="a">
 <p><b class="ab">(a)</b> Validation before deployment  works from first principles, do not ask if the model is good, ask what exactly must be true before this touches a customer, then turn each of those into a measurable gate. In production that looked like this before any change shipped, we replayed real historical emails through the unmodified pipeline with temporal cutoffs so the system could not see the future, graded results deterministically wherever possible with LLM judges only for gray zones, and enforced hard per tenant thresholds in CI (should reply F1 at least 0.80, false positive rate under 0.05, extraction F1 at least 0.70). Any miss blocked the PR automatically, and if the results file was missing the gate failed to close. Ground truth came from production itself, the replies humans actually sent, not from invented test cases.</p>
