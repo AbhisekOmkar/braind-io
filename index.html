@@ -184,29 +184,14 @@ article.q .cat{margin-top:0}
 </section>
 <div class="cell ground part" id="part-1"><span class="cat">Part 1</span><h2 class="display">What you&#x27;ve actually built</h2></div>
 <article class="cell q" id="q1"><span class="cat">Question 01</span><h3 class="title">The biggest thing you&#x27;ve built with AI</h3><div class="a">
-<p>Sidecar's customers are freight forwarders, and their pricing desks run on email. One shipment is dozens of emails across several mailboxes, threads and people. Subjects get rewritten, threads get reused, and the shipment reference arrives late or never. Nobody has the whole story of a shipment in one place. Handlers dig for it, and the email agent had no memory of what had already happened on that deal.</p>
-<p>Trace was the million-dollar feature for the company: one typed record per shipment, rebuilt from that mess. Two things read it. The email agent reads it as its memory of the shipment before it acts. The eval system reads it as ground truth for grading the agent.</p>
-<p class="vlabel">What goes in</p>
-<p>Every inbound and outbound email across all of a tenant's mailboxes, through Nylas webhooks, with the attachments: PDF, CSV and the rest.</p>
-<p class="vlabel">What happens in the middle</p>
-<p>Code does the discovery first. It works out which emails belong together from reply chains, shipment IDs and subject rules, fetches metadata in batches, pre-classifies about 60% of messages by rule, and builds a complete evidence board. Then one bounded model call judges the board: which emails belong to which shipment, and what state the shipment is in. The prompt forbids discovery, so the model can only judge what is on the board. Tool calls and tokens have hard budgets enforced in code, in an agent harness built on the OpenAI Agents SDK. The result is written into the typed record through a strict type check, and the run ends when the save commits.</p>
-<p class="vlabel">What comes out</p>
-<p>One record per shipment: timeline, parties, cargo, ports and status, with every claim citing the email it came from. On top of it, a narrative memory under 150 words that the agent reads before it acts.</p>
-<p class="vlabel">What it does today</p>
-<ul class="facts">
-<li>25k generation runs a week at 98.4% success.</li>
-<li>27.5k+ live shipment records. New records on the live path are created with zero LLM calls.</li>
-<li>Incremental update median 8.4 s, and 94% of that is the model.</li>
-<li>96% of attachable mail attached within five minutes.</li>
-<li>$0.11 per record.</li>
-</ul>
-<p class="vlabel">What happened after launch that I didn't expect</p>
-<ul class="facts">
-<li>The first version let an AI agent search the conversation graph. It found 16.7% of messages, at $2 to $4 per record, in 25 to 45 turns. The traces showed it spent its budget navigating, not judging. We rebuilt it so code does discovery and the model only judges: complete recall, 12 turns, $0.11 a record.</li>
-<li>91.9% of one week's cost was a single behaviour: records being re-saved again and again. One record was saved 56 times.</li>
-<li>21% of customer requests were silently never traced. Nobody had asked for a completeness program, so nobody was measuring it.</li>
-<li>The grader was wrong. A per-item judge scored 89 of 91 confirmed duplicates as correct, because each one looked fine on its own. A label audit corrected 159 of 490 ground-truth labels.</li>
-</ul>
+<p>A freight forwarder's pricing desk lives in email. One shipment is dozens of emails, spread across several mailboxes, threads and people. Subjects get rewritten. Threads get reused. The shipment number shows up late, or never.</p>
+<p>So nobody has the whole story of a shipment in one place. Handlers dig through the inbox to piece it together, and our email agent had no memory of what had already happened on that deal.</p>
+<p>Trace fixes that. It takes every email about a shipment, the customer's enquiry, the agent's offer, the terminal notice, the internal note, and files them onto one record. One record per shipment: the timeline, the people, the cargo, the ports and the status, with every fact pointing back to the email it came from.</p>
+<p>That record is what the rest of the system runs on. The email agent reads a short memory of the shipment, under 150 words, before it acts. The eval system uses the same record as ground truth to grade the agent. It was the million-dollar feature for the company.</p>
+<p>How it works is simple to say. Every inbound and outbound email arrives through Nylas webhooks, attachments included. Code does the finding: it groups emails by reply chain, shipment ID and subject rules, sorts about 60% of them by rule alone, and lays everything out on one evidence board. Then a single bounded model call judges the board: which emails belong together, and what state the shipment is in. The model is not allowed to go searching. It can only judge what is on the board, and its tool calls and tokens are capped in code. The result goes through a strict type check, and the run ends when the save commits.</p>
+<p>Today it runs 25k generation runs a week at 98.4% success. There are 27.5k+ live shipment records, and new ones are created on the live path with zero LLM calls. An incremental update takes 8.4 seconds at the median, 94% of that in the model. 96% of attachable mail is attached within five minutes. It costs $0.11 per record.</p>
+<p>What surprised me after launch was how much the first version got wrong. It let an AI agent search the conversation graph itself. It found only 16.7% of messages, cost $2 to $4 per record and took 25 to 45 turns, because it spent its budget navigating instead of judging. Rebuilding it so that code does the finding and the model only judges gave complete recall in 12 turns at $0.11.</p>
+<p>Then cost monitoring showed that 91.9% of one week's spend was a single behaviour: records being re-saved over and over. One record was saved 56 times. Then we found that 21% of customer requests were never traced at all, silently, because nobody had asked for a completeness program. And the grader itself was wrong. A per-item judge passed 89 of 91 confirmed duplicates because each one looked fine on its own. A label audit corrected 159 of 490 ground-truth labels.</p>
 <p class="vlabel">Trace in the product</p>
 <div class="video"><video controls playsinline preload="metadata" poster="assets/trace-poster.jpg"><source src="assets/trace.mp4" type="video/mp4">Your browser cannot play this video.</video></div>
 <p class="cap">The Traces launch video, 28 seconds, with the company marks taken out. One Outlook inbox with every shipment mixed together, one shipment's mails scattered through it, and the next one's. Then Traces: every mail filed into the shipment it belongs to, the whole thread in order, any mail readable in full right there, and a new mail that arrives and files itself.</p>
