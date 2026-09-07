@@ -8,78 +8,131 @@
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Serif:wght@600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap">
 <style>
-:root{--paper:#FAFAF7;--panel:#F0F1EC;--ink:#17191C;--ink-2:#3E434A;--muted:#6E747B;--rule:#D9DCD5;--rule-2:#E7E9E3;--accent:#155E63;--accent-soft:#DDEBEA;
- --sans:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;--serif:'IBM Plex Serif',Georgia,serif;--mono:'IBM Plex Mono',ui-monospace,Consolas,monospace}
-@media (prefers-color-scheme:dark){:root{--paper:#121416;--panel:#1B1E21;--ink:#E9EBE6;--ink-2:#C3C8C1;--muted:#8B9198;--rule:#2D3236;--rule-2:#24282C;--accent:#6CC3C8;--accent-soft:#1C3336}}
+:root{
+  --forest:#1B5E20; --forest-hi:#2E7D32; --lime:#C6FF00;
+  --cream:#F4F1E6; --cream-2:#EDE9DA; --cream-ink:#14201A; --cream-ink2:#5A6A5F; --cream-rule:#DBD6C4;
+  --pad:36px;
+  --ink-65:color-mix(in srgb,var(--cream-ink) 65%,transparent);
+  --ink-35:color-mix(in srgb,var(--cream-ink) 35%,transparent);
+  --ink-18:color-mix(in srgb,var(--cream-ink) 18%,transparent);
+  color-scheme:light;
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
-a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px;overflow-wrap:anywhere}
-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-h1,h2,h3{margin:0;text-wrap:balance;font-family:var(--serif);font-weight:600}
-.shell{max-width:1120px;margin:0 auto;padding:0 24px 100px;display:grid;grid-template-columns:230px minmax(0,1fr);column-gap:56px}
-.rail{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;padding:40px 0 24px;font-size:13px;scrollbar-width:thin}
-.rail .who{font-family:var(--serif);font-size:17px;line-height:1.3;margin:0 0 4px}
-.rail .role{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 20px}
-.rail nav{display:flex;flex-direction:column;border-top:1px solid var(--rule)}
-.rail nav a{display:grid;grid-template-columns:30px 1fr;gap:8px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--rule-2);color:var(--muted);text-decoration:none}
-.rail nav a:hover{color:var(--ink)}
-.rail nav a.p{color:var(--ink);font-weight:600;padding-top:14px}
-.rail nav a.p span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--accent)}
-.rail nav a.q span{font-family:var(--mono);font-size:11px;font-variant-numeric:tabular-nums}
-.main{max-width:70ch;padding-top:44px}
-.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
-h1{font-size:clamp(34px,4.5vw,48px);line-height:1.05;letter-spacing:-.02em}
-.basics{margin:28px 0 0;border-top:2px solid var(--ink)}
-.basics .row{display:grid;grid-template-columns:200px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--rule)}
-.basics dt{font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--muted);padding-top:3px}
-.basics dd{margin:0}
-.basics .row:nth-child(2) dd{font-weight:600}
-.sublabel{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:26px 0 6px}
-.papers{margin:0;padding-left:1.4em;font-size:15px}
-.papers li{margin:4px 0}
-.line{margin:10px 0 0}
-figure{margin:22px 0 0;max-width:340px}
-figure img{display:block;width:100%;height:auto;border:1px solid var(--rule)}
-.part{margin-top:88px;scroll-margin-top:24px}
-.ph{display:flex;align-items:baseline;gap:16px;padding-bottom:12px;border-bottom:2px solid var(--ink)}
-.ph .pn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:3px 8px}
-.ph h2{font-size:clamp(26px,3.2vw,34px);line-height:1.1;letter-spacing:-.015em}
-article.q{margin-top:56px;scroll-margin-top:24px}
-.qh{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px}
-.qh .num{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted)}
-.qh h3{font-size:24px;line-height:1.15;letter-spacing:-.01em}
-.a p{margin:0 0 14px}
-.a p:last-child{margin-bottom:0}
-.a .ab{font-family:var(--mono);font-size:13px;color:var(--muted);margin-right:4px}
-.a .sublabel{margin-top:22px}
-.lines{margin:0;padding-left:1.5em}
-.lines li{margin:8px 0}
-.lines li::marker{font-family:var(--mono);font-size:13px;color:var(--muted)}
-.video{position:relative;margin:20px 0 12px;aspect-ratio:4/3;background:var(--panel);border:1px solid var(--rule)}
-.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.links{list-style:none;margin:0;padding:0;font-size:15px}
-.links li{margin:4px 0}
-footer{margin-top:90px;padding-top:18px;border-top:2px solid var(--ink);font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.7}
-@media (max-width:900px){
- .shell{grid-template-columns:1fr;padding:0 18px 70px}
- .rail{position:static;height:auto;padding:24px 0 0}
- .rail nav{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
- .rail nav a.p{grid-column:1/-1}
- .main{padding-top:26px}
- .basics .row{grid-template-columns:1fr;gap:4px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none !important}}
+body{margin:0;background:var(--cream-2);color:var(--cream-ink);font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:300;font-size:16px;line-height:1.32;
+  border-top:1px solid var(--cream-ink);border-bottom:1px solid var(--cream-ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,p,ul,ol,figure,dl,dd{margin:0}
+h1,h2,h3{font-weight:200;text-wrap:balance}
+ul,ol{padding:0;list-style:none}
+img{max-width:100%}
+a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--cream-ink);overflow-wrap:anywhere}
+a:hover{text-decoration-color:var(--ink-35)}
+a:focus-visible{outline:1px solid var(--cream-ink);outline-offset:3px}
+b,strong{font-weight:400}
+em{font-style:normal;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.12em;text-decoration-color:var(--ink-35)}
+
+/* type roles, from the study */
+.cat{font-size:16px;font-weight:300;line-height:1.32;color:var(--cream-ink2)}
+.title{font-size:38px;font-weight:200;line-height:1}
+.display{font-size:clamp(38px,4.4vw,64px);font-weight:200;line-height:1}
+.meta{font-size:16px;font-weight:300;line-height:2.37;margin-top:auto;padding-top:30px;align-self:flex-end;text-align:right;color:var(--cream-ink2)}
+.vlabel{font-size:16px;font-weight:300;line-height:2.37;color:var(--ink-65)}
+.muted{color:var(--cream-ink2)}
+
+/* frame */
+.shell{max-width:1180px;margin:0 auto;padding:0 30px 90px;display:grid;grid-template-columns:250px minmax(0,1fr);column-gap:45px}
+.rail{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;padding:45px 0 30px;scrollbar-width:thin}
+.rail .who{font-size:21px;font-weight:200;line-height:1.31}
+.rail .role{margin-top:6px}
+.rail nav{margin-top:30px;display:flex;flex-direction:column}
+.rail nav a{display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:baseline;padding:9px 0;border-top:1px solid var(--cream-rule);text-decoration:none;font-size:14px;line-height:1.32;color:var(--cream-ink2)}
+.rail nav a:last-child{border-bottom:1px solid var(--cream-rule)}
+.rail nav a:hover{color:var(--cream-ink)}
+.rail nav a.p{color:var(--cream-ink);font-weight:400;padding-top:16px}
+.rail nav a span{font-variant-numeric:tabular-nums;font-weight:300}
+.main{padding-top:45px}
+
+/* lattice */
+.lattice{display:grid;grid-template-columns:minmax(0,1fr);gap:1px;background:var(--cream-rule);border:1px solid var(--cream-rule)}
+.cell{background:var(--cream);padding:var(--pad);display:flex;flex-direction:column;min-width:0;position:relative;scroll-margin-top:24px}
+.cell>*+*{margin-top:20px}
+.cell>.title{margin-top:30px}
+.ground{background:var(--cream-2)}
+.tint{background:color-mix(in srgb,var(--forest) 16%,var(--cream))}
+
+/* masthead */
+.hero{min-height:0}
+.hero .pill{display:inline-flex;gap:10px;align-items:center;align-self:flex-start;line-height:1.32}
+.pill .dot{width:6px;height:6px;background:var(--cream-ink);display:inline-block;flex:none}
+.hero h1{padding-top:40px;font-size:clamp(44px,5.4vw,80px);font-weight:200;line-height:1;max-width:18ch}
+.hero .foot{line-height:2.37;color:var(--cream-ink2);margin-top:30px}
+
+/* basics */
+.basics .row{display:grid;grid-template-columns:230px 1fr;gap:20px;padding:12px 0;border-top:1px solid var(--ink-18)}
+.basics .row:last-child{border-bottom:1px solid var(--ink-18)}
+.basics dt{color:var(--ink-65)}
+.basics dd{font-weight:300}
+.basics .row:nth-child(2) dd{font-weight:400}
+.papers{margin-top:0}
+.papers li{padding:8px 0;border-top:1px solid var(--cream-rule);display:grid;grid-template-columns:28px 1fr;gap:10px;font-size:15px}
+.papers li::before{counter-increment:paper;content:"0" counter(paper);color:var(--cream-ink2)}
+.papers{counter-reset:paper}
+.papers li:last-child{border-bottom:1px solid var(--cream-rule)}
+.line{margin-top:20px}
+.more .vlabel{margin-top:30px}
+.more .vlabel+*{margin-top:0}
+figure{margin-top:30px;max-width:360px}
+figure img{display:block;width:100%;height:auto;border:1px solid var(--ink-18)}
+
+/* parts and questions */
+.part{padding-top:60px;padding-bottom:40px}
+.part .cat{color:var(--cream-ink)}
+.part .cat::before{content:"";display:inline-block;width:14px;height:14px;background:var(--lime);border:1px solid var(--cream-ink);margin-right:12px;vertical-align:-1px}
+.part .display{margin-top:30px}
+article.q .cat{margin-top:0}
+.a{margin-top:30px;display:flex;flex-direction:column;gap:14px;max-width:66ch}
+.a p{line-height:1.45}
+.a .ab{display:inline-block;min-width:34px;font-weight:400}
+.a .vlabel{margin-top:10px;margin-bottom:-8px}
+.lines{counter-reset:line;display:flex;flex-direction:column;gap:8px}
+.lines li{display:grid;grid-template-columns:34px 1fr;gap:10px;line-height:1.45}
+.lines li::before{counter-increment:line;content:"0" counter(line);color:var(--cream-ink2);font-variant-numeric:tabular-nums}
+.lines li:nth-child(n+10)::before{content:counter(line)}
+.video{background:var(--lime);padding:12px;margin-top:10px}
+.video iframe{display:block;width:100%;aspect-ratio:4/3;border:0;background:var(--cream-ink)}
+.links{display:flex;flex-direction:column}
+.links li{padding:10px 0;border-top:1px solid var(--cream-rule);font-size:15px}
+.links li:last-child{border-bottom:1px solid var(--cream-rule)}
+
+/* close */
+.close p{max-width:48ch;font-size:21px;font-weight:200;line-height:1.31}
+.close .meta{align-self:flex-start;text-align:left}
+
+@media (max-width:1100px){
+  .a{max-width:none}
 }
-@media print{.rail{display:none}.shell{grid-template-columns:1fr}article.q{break-inside:avoid}.video{display:none}}
+@media (max-width:900px){
+  :root{--pad:26px}
+  .shell{grid-template-columns:minmax(0,1fr);padding:0 16px 60px}
+  .rail{position:static;height:auto;padding:30px 0 0}
+  .rail nav{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+  .rail nav a.p{grid-column:1/-1}
+  .main{padding-top:30px}
+  .basics .row{grid-template-columns:1fr;gap:4px}
+  .hero h1{max-width:100%}
+  .title{font-size:30px}
+}
+@media print{.rail{display:none}.shell{grid-template-columns:1fr}.cell{break-inside:avoid}.video{display:none}}
 </style>
 </head>
 <body>
 <div class="shell">
 <aside class="rail" aria-label="Contents">
 <p class="who">Abhisek Omkar Prasad</p>
-<p class="role">Head of AI · first interview</p>
+<p class="role cat">Head of AI · first interview</p>
 <nav>
 <a class="p" href="#top"><span>00</span>The basics</a>
 <a class="p" href="#part-1"><span>P1</span>What you&#x27;ve actually built</a>
@@ -105,96 +158,107 @@ footer{margin-top:90px;padding-top:18px;border-top:2px solid var(--ink);font-fam
 <a class="q" href="#q18"><span>18</span>Hot take</a>
 </nav>
 </aside>
-<main class="main" id="top">
-<p class="eyebrow">BraindAI · Head of AI · first interview · September 2026</p>
-<h1>Head of AI: Abhisek Omkar Prasad</h1>
+<main class="main">
+<div class="lattice">
+<header class="cell ground hero" id="top">
+<span class="pill"><span class="dot" aria-hidden="true"></span>BraindAI · Head of AI · first interview · September 2026</span>
+<h1>Head of AI: <em>Abhisek Omkar Prasad</em></h1>
+<p class="foot">Eighteen questions, one recording, one email. Written in my own words.</p>
+</header>
+<section class="cell tint" aria-label="The basics">
+<span class="cat">The basics</span>
 <dl class="basics"><div class="row"><dt>Name</dt><dd>Abhisek Omkar Prasad</dd></div><div class="row"><dt>The one link that proves I build</dt><dd><a href="https://main.dte6zrkctgz39.amplifyapp.com/analytics" rel="noopener">https://main.dte6zrkctgz39.amplifyapp.com/analytics</a></dd></div><div class="row"><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/abhisek-omkar-prasad-70937a173/" rel="noopener">https://www.linkedin.com/in/abhisek-omkar-prasad-70937a173/</a></dd></div><div class="row"><dt>Based in</dt><dd>Bengaluru, India</dd></div></dl>
-<p class="sublabel">Research Papers</p><ol class="papers"><li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0921889022002299" rel="noopener">https://www.sciencedirect.com/science/article/abs/pii/S0921889022002299</a></li><li><a href="https://link.springer.com/article/10.1007/s42979-023-01940-9" rel="noopener">https://link.springer.com/article/10.1007/s42979-023-01940-9</a></li><li><a href="https://link.springer.com/chapter/10.1007/978-981-99-6702-5_2" rel="noopener">https://link.springer.com/chapter/10.1007/978-981-99-6702-5_2</a></li><li><a href="https://www.google.co.in/books/edition/Machine_Learning_for_Healthcare_Systems/Yq3NEAAAQBAJ?hl=en&amp;gbpv=1&amp;dq=info:nQ-28YiHKdUJ:scholar.google.com&amp;pg=PA109&amp;printsec=frontcover" rel="noopener">https://www.google.co.in/books/edition/Machine_Learning_for_Healthcare_Systems/Yq3NEAAAQBAJ?hl=en&amp;gbpv=1&amp;dq=info:nQ-28YiHKdUJ:scholar.google.com&amp;pg=PA109&amp;printsec=frontcover</a></li><li><a href="https://www.google.co.in/books/edition/Evolution_in_Computational_Intelligence/2HbkEAAAQBAJ?hl=en&amp;gbpv=1&amp;dq=info:xn6qeeC2lLcJ:scholar.google.com&amp;pg=PA21&amp;printsec=frontcover" rel="noopener">https://www.google.co.in/books/edition/Evolution_in_Computational_Intelligence/2HbkEAAAQBAJ?hl=en&amp;gbpv=1&amp;dq=info:xn6qeeC2lLcJ:scholar.google.com&amp;pg=PA21&amp;printsec=frontcover</a></li></ol>
+</section>
+<section class="cell more" aria-label="Background">
+<span class="cat">Background</span>
+<p class="vlabel">Research Papers</p><ol class="papers"><li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0921889022002299" rel="noopener">https://www.sciencedirect.com/science/article/abs/pii/S0921889022002299</a></li><li><a href="https://link.springer.com/article/10.1007/s42979-023-01940-9" rel="noopener">https://link.springer.com/article/10.1007/s42979-023-01940-9</a></li><li><a href="https://link.springer.com/chapter/10.1007/978-981-99-6702-5_2" rel="noopener">https://link.springer.com/chapter/10.1007/978-981-99-6702-5_2</a></li><li><a href="https://www.google.co.in/books/edition/Machine_Learning_for_Healthcare_Systems/Yq3NEAAAQBAJ?hl=en&amp;gbpv=1&amp;dq=info:nQ-28YiHKdUJ:scholar.google.com&amp;pg=PA109&amp;printsec=frontcover" rel="noopener">https://www.google.co.in/books/edition/Machine_Learning_for_Healthcare_Systems/Yq3NEAAAQBAJ?hl=en&amp;gbpv=1&amp;dq=info:nQ-28YiHKdUJ:scholar.google.com&amp;pg=PA109&amp;printsec=frontcover</a></li><li><a href="https://www.google.co.in/books/edition/Evolution_in_Computational_Intelligence/2HbkEAAAQBAJ?hl=en&amp;gbpv=1&amp;dq=info:xn6qeeC2lLcJ:scholar.google.com&amp;pg=PA21&amp;printsec=frontcover" rel="noopener">https://www.google.co.in/books/edition/Evolution_in_Computational_Intelligence/2HbkEAAAQBAJ?hl=en&amp;gbpv=1&amp;dq=info:xn6qeeC2lLcJ:scholar.google.com&amp;pg=PA21&amp;printsec=frontcover</a></li></ol>
 <p class="line">Made Odisha First Self Driving Car and Won in IGVC in USA :- <a href="https://github.com/Project-SwaG/swag-igvc-simulator" rel="noopener">https://github.com/Project-SwaG/swag-igvc-simulator</a></p>
-<p class="sublabel">I was Leading the Team</p>
+<p class="vlabel">I was Leading the Team</p>
 <p class="line"><a href="https://roboticsindia.live/project-swayamchalit-gaadi-first-self-driving-car-team-from-odisha/" rel="noopener">https://roboticsindia.live/project-swayamchalit-gaadi-first-self-driving-car-team-from-odisha/</a></p>
 <figure><img src="assets/project-swag.jpg" alt="Robotics India feature: Project Swayamchalit Gaadi, the KIIT Bhubaneswar team SwaG, the first self-driving car team from Odisha" width="1179" height="1155"></figure>
-<section class="part" id="part-1"><div class="ph"><span class="pn">Part 1</span><h2>What you&#x27;ve actually built</h2></div>
-<article class="q" id="q1"><div class="qh"><span class="num">Q01</span><h3>The biggest thing you&#x27;ve built with AI</h3></div><div class="a">
+</section>
+<div class="cell ground part" id="part-1"><span class="cat">Part 1</span><h2 class="display">What you&#x27;ve actually built</h2></div>
+<article class="cell q" id="q1"><span class="cat">Question 01</span><h3 class="title">The biggest thing you&#x27;ve built with AI</h3><div class="a">
 <p>Sidecar was working on a feature called Trace which was generating Million Dollar for the company. The problem was freight forwarder pricing desk runs on email one shipment = dozens of emails across several mailboxes, threads, people. Subjects mutate, threads get reused, identifiers arrive late or never. Nobody has the whole story of a shipment in one place. Handlers dig the email agent has no memory of what already happened on that deal. Trace is one typed narrative pre shipment rebuilt from that mess. Two consumers the email agent (as its memory of the shipment) and the eval system as ground truth for grading the agent.</p>
 <p>Every inbound and outbound email via nylas webhook across all mailboxes at a tenant level with attachments as well PDF, CSV etc.</p>
 <p>First resolve which emails belong together, reply chains, shipment ids subject rules, fetch metadata batch wise, pre classify 60% of message by rule, build complete evidence board. Then a bounded model call judges the board what belongs to what the shipment state is Prompt forbids discovery it can only judge what&#x27;s on the board hard budgets on toll calls and token enforcement in code by scaffolding in agent harness in using open ai agent sdk. Then format the typed record save via strict typed check run ends when save commit.</p>
 <p>One record per shipment timeline, parties, cargo, ports, status, with every claim citing the email it came from Under 150 words of narrative memory the agent reads before it acts 25k generation runs a week at 98.4% success 27.5k+ live shipment records new records created on the live path with zero LLM calls. Incremental update median 8.4 s, 94% of that is the model.96% of attachable mail attached within five minutes $0.11 per record.</p>
-<p class="sublabel">What happened after launch</p>
+<p class="vlabel">What happened after launch</p>
 <p>AI agent searching the conversation graph got 16.7% of messages at $2–4 per record, 25–45 turns. Root cause from the traces it spent its budget navigating, not judging rebuilt so code does discovery and the model only judges  complete recall 12 turns $0.11.91.9% of a week&#x27;s cost was one behaviour records being re-saved repeatedly One record saved 56 times21% of customer requests were silently never traced Nobody had asked for a completeness program the grader was wrong a per-item judge scored 89 of 91 confirmed duplicates as correct because each looked fine on its own Label audit corrected 159 of 490 ground truth labels</p>
-</div></article>
-<article class="q" id="q2"><div class="qh"><span class="num">Q02</span><h3>How do you know it&#x27;s right?</h3></div><div class="a">
-<p><span class="ab">(a)</span> Validation before deployment  works from first principles, do not ask if the model is good, ask what exactly must be true before this touches a customer, then turn each of those into a measurable gate. In production that looked like this before any change shipped, we replayed real historical emails through the unmodified pipeline with temporal cutoffs so the system could not see the future, graded results deterministically wherever possible with LLM judges only for gray zones, and enforced hard per tenant thresholds in CI (should reply F1 at least 0.80, false positive rate under 0.05, extraction F1 at least 0.70). Any miss blocked the PR automatically, and if the results file was missing the gate failed to close. Ground truth came from production itself, the replies humans actually sent, not from invented test cases.</p>
-<p><span class="ab">(b)</span> Worst failure. A memory update loop went runaway. One shipment record got regenerated 91 times in 24 hours, and the system was queuing 1,700 regeneration tasks an hour. Nothing was wrong in any single run, so no error fired, we caught it through cost monitoring when one week&#x27;s spend was 92 percent multi save churn. What I owned: I had built triggers on events with no counters or budgets around them. Permanent fix: memory updates now fire on counters with debounce, every record drains through a per record queue, and hard budgets live in code outside the model. And the rule I carry since: instrument cost and volume like you instrument correctness, because the worst failures do not throw errors.</p>
-</div></article>
-<article class="q" id="q3"><div class="qh"><span class="num">Q03</span><h3>Your machine</h3></div><div class="a">
+</div><span class="meta">01 / 18</span></article>
+<article class="cell q" id="q2"><span class="cat">Question 02</span><h3 class="title">How do you know it&#x27;s right?</h3><div class="a">
+<p><b class="ab">(a)</b> Validation before deployment  works from first principles, do not ask if the model is good, ask what exactly must be true before this touches a customer, then turn each of those into a measurable gate. In production that looked like this before any change shipped, we replayed real historical emails through the unmodified pipeline with temporal cutoffs so the system could not see the future, graded results deterministically wherever possible with LLM judges only for gray zones, and enforced hard per tenant thresholds in CI (should reply F1 at least 0.80, false positive rate under 0.05, extraction F1 at least 0.70). Any miss blocked the PR automatically, and if the results file was missing the gate failed to close. Ground truth came from production itself, the replies humans actually sent, not from invented test cases.</p>
+<p><b class="ab">(b)</b> Worst failure. A memory update loop went runaway. One shipment record got regenerated 91 times in 24 hours, and the system was queuing 1,700 regeneration tasks an hour. Nothing was wrong in any single run, so no error fired, we caught it through cost monitoring when one week&#x27;s spend was 92 percent multi save churn. What I owned: I had built triggers on events with no counters or budgets around them. Permanent fix: memory updates now fire on counters with debounce, every record drains through a per record queue, and hard budgets live in code outside the model. And the rule I carry since: instrument cost and volume like you instrument correctness, because the worst failures do not throw errors.</p>
+</div><span class="meta">02 / 18</span></article>
+<article class="cell q" id="q3"><span class="cat">Question 03</span><h3 class="title">Your machine</h3><div class="a">
 <p>Everything runs on a VM that never sleeps  multiple Claude Code sessions live 24×7 with remote control, so my phone is a full terminal into them. Claude is wired into Granola (client meeting notes), Slack, and our AWS/Azure infra, and writes everything it learns into mindmap, a shared knowledge repo  which is also how my Claude coordinates with my teammates Claude&#x27;s when we split a feature.</p>
 <p>Two loops run on top: devils-advocate  when Claude finishes work, it spawns a Codex agent to review it, and they argue in rounds until the diff survives; and a feedback loop that watches production, root-causes defects, and opens draft PRs on its own. It never merges — humans keep the judgment.</p>
 <p>For example sweep surfaced 5 findings and opened a draft PR for Customer Draft before I woke up a session prepped my client call from Granola. It got one thing wrong, a false-positive hallucination the customer had actually stated  and one fix patched the symptom, not the cause. I still reviewed every PR, made the commercial call, and talked to the client myself.</p>
-</div></article>
-<article class="q" id="q4"><div class="qh"><span class="num">Q04</span><h3>Teach us something</h3></div><div class="a">
+</div><span class="meta">03 / 18</span></article>
+<article class="cell q" id="q4"><span class="cat">Question 04</span><h3 class="title">Teach us something</h3><div class="a">
 <p>We should talk to customers the way The Mom Test teached  never ask what they want, watch what they do. For AI products I take it one step further: don&#x27;t ask users what they think of your AI, log every edit they make to its output before sending. Their opinions are polite noise; their corrections are the roadmap. Trust Your Team Always 🙂</p>
-</div></article>
-<article class="q" id="q5"><div class="qh"><span class="num">Q05</span><h3>The thing that builds the thing</h3></div><div class="a">
+</div><span class="meta">04 / 18</span></article>
+<article class="cell q" id="q5"><span class="cat">Question 05</span><h3 class="title">The thing that builds the thing</h3><div class="a">
 <p>At Nurix the thing that kept delivering was the analytics layer around our voice agents. My piece a daily reporting pipeline for Aditya Birla&#x27;s lending agent —one scheduled job that pulls the day&#x27;s calls from the warehouse, builds their 30-column report, encrypts it, and drops it in their cloud. Built in about a week it then ran every day untouched, covering ~12,000 calls a day, replacing a daily manual export job and doubling as the compliance deliverable for a bank. Call it ~50 hours in, a few hundred hours a year out  plus the whole platform worked on the same principle configure an analytics metric once in the UI, the extraction prompt and schema regenerate themselves, and every call after that scores itself with zero engineering.</p>
-</div></article>
-<article class="q" id="q6"><div class="qh"><span class="num">Q06</span><h3>Show us something real</h3></div><div class="a">
+</div><span class="meta">05 / 18</span></article>
+<article class="cell q" id="q6"><span class="cat">Question 06</span><h3 class="title">Show us something real</h3><div class="a">
 <p>I&#x27;m showing IntelliAx, a voice AI platform I built on the side  create a voice agent (pick STT/LLM/TTS providers, voice, interruption settings), talk to it live from the browser, and get back the recording, transcript, an auto-generated call summary, and per-call observability EOU/TTFT/TTFB latency and a cost breakdown per provider. I later sold it to a voice AI company. In the video I run it live, show the hardest piece (the telephony audio bridge — μ-law to PCM with barge-in implemented at the wire level), what broke with real users, and the biggest rebuild call I made  v1 was built on Retell as the engine; I threw it away and built my own LiveKit-based worker so I owned latency, cost, and turn-taking.</p>
 <p>Platform Link (Intelliax) :- <a href="https://main.dte6zrkctgz39.amplifyapp.com/web-call?agent=8ffc1ad2-77e9-4c8f-b128-d8c295e6a331" rel="noopener">https://main.dte6zrkctgz39.amplifyapp.com/web-call?agent=8ffc1ad2-77e9-4c8f-b128-d8c295e6a331</a><br><br>Xebit :- <a href="https://xebit.ai/" rel="noopener">https://xebit.ai/</a></p>
-<p class="sublabel">Loom</p>
+<p class="vlabel">Loom</p>
 <div class="video"><iframe src="https://www.loom.com/embed/7b8a1c3939874d7a9e9bc85addd9b86a" title="Loom recording" allow="fullscreen" allowfullscreen loading="lazy"></iframe></div>
 <ul class="links"><li><a href="https://www.loom.com/share/7b8a1c3939874d7a9e9bc85addd9b86a" rel="noopener">https://www.loom.com/share/7b8a1c3939874d7a9e9bc85addd9b86a</a></li><li><a href="https://www.loom.com/share/9b3a410a6bed48c7819879b2707ca955" rel="noopener">https://www.loom.com/share/9b3a410a6bed48c7819879b2707ca955</a></li></ul>
-</div></article>
-</section>
-<section class="part" id="part-2"><div class="ph"><span class="pn">Part 2</span><h2>How you think</h2></div>
-<article class="q" id="q7"><div class="qh"><span class="num">Q07</span><h3>The AI Brain for law firms</h3></div><div class="a">
+</div><span class="meta">06 / 18</span></article>
+<div class="cell ground part" id="part-2"><span class="cat">Part 2</span><h2 class="display">How you think</h2></div>
+<article class="cell q" id="q7"><span class="cat">Question 07</span><h3 class="title">The AI Brain for law firms</h3><div class="a">
 <p>I have already built this system once, for freight forwarders instead of law firms. A pricing desk and a law firm have the same shape the real knowledge lives in emails and attachments, the work is a stream of matters (for me, shipments), and the users only trust what they can verify. So I would build the law firm brain exactly the way I built the RFQ agent.</p>
 <p>Layers, mapped from what I ran in production. Ingestion connect Outlook and the document system, parse every attachment, extract typed facts where every single claim carries a citation to where it came from, in my system that was a field citations record pointing at subject, body or attachment, here it points at the page of the contract. Memory one living, cited summary per matter, the same thing as my shipment memory (Trace), which rebuilds one clean narrative per shipment from mail scattered across mailboxes, built deterministically first with the LLM only judging gray zones. Storage one isolated database per client, so ethical walls are structural, in freight that was one database per tenant. Agents narrow ones, an intake classifier, precedent search over the firm&#x27;s own past matters, a drafting agent that only asks a question when a required field is genuinely missing, and a deadline watcher that is plain code with no LLM, because dates that are already extracted do not need a model. Human touchpoints: nothing ever sends itself, every output lands as a draft card the lawyer approves or edits, and every edit is logged, that edit stream was my eval ground truth and roadmap in production and it would be here too.</p>
 <p>V1 is one workflow, not a platform: ingest, ask this matter with citations, and deadline alerts for 5 pilot lawyers. Day 30 live, day 60 measuring edit rate, day 90 add the one highest volume routine draft type behind an eval gate. Deliberately out of v1:case law research (Westlaw exists and public law is where hallucinations live), auto sending (trust), a general chatbot (unscoped questions are unverifiable), fine tuning (retrieval plus citations wins at this data size).</p>
-</div></article>
-<article class="q" id="q8"><div class="qh"><span class="num">Q08</span><h3>The dice roll</h3></div><div class="a">
+</div><span class="meta">07 / 18</span></article>
+<article class="cell q" id="q8"><span class="cat">Question 08</span><h3 class="title">The dice roll</h3><div class="a">
 <ol class="lines"><li>The offer: your marina&#x27;s phone, whiteboard and paperwork, run by AI, so a call at 7pm in April still becomes a booked haul out.</li><li>Agent one, front desk: answers every call and email, quotes slip rates, runs the waiting list, and books lifts, launches and repairs straight into the yard calendar instead of onto a sticky note.</li><li>Agent two, yard scheduler: plans each day around the travel lift and the weather forecast, and when a storm moves in it reshuffles the week and texts every affected owner before they can call angry.</li><li>Agent three, paperwork and parts: collects insurance certificates before winter storage contracts, orders parts the day a repair is approved, and flags when a 3 week part will break a promised launch date.</li><li>Why they pay: one missed call in season is a lost 3,000 dollar haul out, and the office runs on one overwhelmed seasonal person, so 700 dollars a month per yard is cheaper than any hire they can actually find.</li><li>First five customers: go in the off season when phones are quiet, run one local yard free through spring launch, then let the owner tell the five yards next door, because marina operators all know each other.</li><li>After 50 customers the system knows how long every job actually takes per boat type, real parts lead times by supplier, which weather forecasts actually cancel work, and regional slip pricing, none of which a new competitor can scrape.</li><li>It also holds each boat&#x27;s full service history, and that history follows the boat, so owners start asking their next yard to use it.</li><li>What kills it: owners who insist on talking to Dave, the guy they have known for 20 years, and yards that quietly keep the whiteboard.</li><li>I would know in 90 days from three numbers: what share of calls the agent handles without a human, what share of bookings it creates, and whether staff still update the whiteboard by hand, if the whiteboard survives spring launch, the product failed.</li></ol>
-</div></article>
+</div><span class="meta">08 / 18</span></article>
 <!-- Q9 The complaint paradox: no answer in the document yet. Add it here. -->
-<article class="q" id="q10"><div class="qh"><span class="num">Q10</span><h3>Everyone improved, everything got worse</h3></div><div class="a">
+<article class="cell q" id="q10"><span class="cat">Question 10</span><h3 class="title">Everyone improved, everything got worse</h3><div class="a">
 <p>Every team hit its own number by quietly passing cost downstream. Sales closed faster by promising more, Scoping went faster by writing thinner docs, Build shipped more by cutting tickets smaller and deferring debt, CS responded fast but shallow. All dashboards are correct because the damage lives between the teams, in the handoffs and queues, and end to end delivery time belongs to nobody.</p>
 <p>Look first at the handoffs: map the last ten projects into time being worked vs time sitting in a queue between teams. Most of the delay will be waiting, and most quality complaints will trace back to thin scoping.</p>
 <p>One change: one shared number above all four dashboards, signed to delivered with a quality gate, reviewed weekly by all four leads together. I built this exact thing for AI pipelines, one board across the whole system where every issue becomes a Linear ticket with a named owner and a Slack alert, because green team dashboards mean nothing when the system number is falling.</p>
-</div></article>
-</section>
-<section class="part" id="part-3"><div class="ph"><span class="pn">Part 3</span><h2>How you lead</h2></div>
-<article class="q" id="q11"><div class="qh"><span class="num">Q11</span><h3>The teams you&#x27;ve led</h3></div><div class="a">
+</div><span class="meta">10 / 18</span></article>
+<div class="cell ground part" id="part-3"><span class="cat">Part 3</span><h2 class="display">How you lead</h2></div>
+<article class="cell q" id="q11"><span class="cat">Question 11</span><h3 class="title">The teams you&#x27;ve led</h3><div class="a">
 <p>Nurix: led 6 to 8 engineers on client integrations for the voice platform, on the hook for a bank&#x27;s daily data delivery across 12,000 calls a day, would delegate client calls earlier instead of holding them all myself. Sidecar: led 4 to 5 engineers building our AI email automation product for six live customers, on the hook for production AI quality, would build the eval gates in month one instead of month three.</p>
 <p>Plus my agent fleet: Claude sessions running 24x7 with a reviewer agent, findings become Linear tickets with Slack alerts, run like a small team.</p>
 <p>Made an engineer better: gave a Sidecar teammate my full setup, context files, review agent, shared notes between our AI sessions. They still run it without me and ship noticeably faster.</p>
-</div></article>
-<article class="q" id="q12"><div class="qh"><span class="num">Q12</span><h3>The hardest calls</h3></div><div class="a">
-<p><span class="ab">(a)</span> Hardest call. At Sidecar I scrapped my own design for the shipment memory system after weeks of work, it was hitting 17 percent recall at 2 to 4 dollars per record. Admitting my approach was wrong in front of the team and rebuilding it deterministic was the hard part. The rebuild got 100 percent recall at 11 cents.</p>
-<p><span class="ab">(b)</span> Delivery failure. We found 21 percent of customer requests were being silently dropped, the system decided to reply and then nothing went out, no crash, no alert. My fault: I had built alerts for errors but nothing that measured absence. Permanent fix: a daily check that looks for missing replies, and my rule since then, alert on silence, not just errors. It is now under 1.5 percent a day.</p>
-</div></article>
-<article class="q" id="q13"><div class="qh"><span class="num">Q13</span><h3>Hire or fire</h3></div><div class="a">
-<p><span class="ab">(a)</span> My rule: if the output is checkable, build the system, if it needs judgment or a relationship, hire the person. Right call replaced a daily standup call and client report with one pipeline, a week to build, ran untouched for months. Wrong call: tried to automate eval labeling with LLM judges, an audit corrected 159 of 490 labels, had to bring human experts back.</p>
-<p><span class="ab">(b)</span> Restructure first: move them off the client critical path, cut work into 2 to 3 day demoable chunks, and I own the client deadline with buffer. My line: I can absorb missed deadlines, I cannot absorb surprises. The third time a slip arrives unannounced, or the client hears about a problem before I do, we part ways and I say exactly why.</p>
-</div></article>
-<article class="q" id="q14"><div class="qh"><span class="num">Q14</span><h3>Your first 30 days</h3></div><div class="a">
+</div><span class="meta">11 / 18</span></article>
+<article class="cell q" id="q12"><span class="cat">Question 12</span><h3 class="title">The hardest calls</h3><div class="a">
+<p><b class="ab">(a)</b> Hardest call. At Sidecar I scrapped my own design for the shipment memory system after weeks of work, it was hitting 17 percent recall at 2 to 4 dollars per record. Admitting my approach was wrong in front of the team and rebuilding it deterministic was the hard part. The rebuild got 100 percent recall at 11 cents.</p>
+<p><b class="ab">(b)</b> Delivery failure. We found 21 percent of customer requests were being silently dropped, the system decided to reply and then nothing went out, no crash, no alert. My fault: I had built alerts for errors but nothing that measured absence. Permanent fix: a daily check that looks for missing replies, and my rule since then, alert on silence, not just errors. It is now under 1.5 percent a day.</p>
+</div><span class="meta">12 / 18</span></article>
+<article class="cell q" id="q13"><span class="cat">Question 13</span><h3 class="title">Hire or fire</h3><div class="a">
+<p><b class="ab">(a)</b> My rule: if the output is checkable, build the system, if it needs judgment or a relationship, hire the person. Right call replaced a daily standup call and client report with one pipeline, a week to build, ran untouched for months. Wrong call: tried to automate eval labeling with LLM judges, an audit corrected 159 of 490 labels, had to bring human experts back.</p>
+<p><b class="ab">(b)</b> Restructure first: move them off the client critical path, cut work into 2 to 3 day demoable chunks, and I own the client deadline with buffer. My line: I can absorb missed deadlines, I cannot absorb surprises. The third time a slip arrives unannounced, or the client hears about a problem before I do, we part ways and I say exactly why.</p>
+</div><span class="meta">13 / 18</span></article>
+<article class="cell q" id="q14"><span class="cat">Question 14</span><h3 class="title">Your first 30 days</h3><div class="a">
 <p>Week 1: ship a real PR through their review myself, sit with each dev to see where time actually goes, then pair with the most open one and finish their days long ticket in hours, in front of them. Week 2: build the shared setup, repo context files, an AI review agent on every PR, one automation for the biggest time sink, all opt in. Week 3: every dev runs one of their own tickets through it with me, their complaints tune it, skeptics convert on their own work not demos. Day 30: numbers not claims, cycle time and review turnaround before vs after plus one two week feature shipped in three days, and if the numbers are not there I say so, 5x is what I believe, not what I promise. I will make claude skills for each repo and task so that we can ship things faster at 10x.</p>
-</div></article>
-</section>
-<section class="part" id="part-4"><div class="ph"><span class="pn">Part 4</span><h2>Who you are</h2></div>
-<article class="q" id="q15"><div class="qh"><span class="num">Q15</span><h3>Nobody asked</h3></div><div class="a">
+</div><span class="meta">14 / 18</span></article>
+<div class="cell ground part" id="part-4"><span class="cat">Part 4</span><h2 class="display">Who you are</h2></div>
+<article class="cell q" id="q15"><span class="cat">Question 15</span><h3 class="title">Nobody asked</h3><div class="a">
 <p>Use IntelliAx. Nobody asked me to build a voice AI testing platform. I was watching teams ship voice agents with ad hoc testing and I built the thing I wished existed, simulated callers with personas, LLM judged rubrics, latency and interruption metrics per call. Built it solo on nights and weekends. What happened next: a voice AI company bought it.</p>
-</div></article>
-<article class="q" id="q16"><div class="qh"><span class="num">Q16</span><h3>Five years from now</h3></div><div class="a">
+</div><span class="meta">15 / 18</span></article>
+<article class="cell q" id="q16"><span class="cat">Question 16</span><h3 class="title">Five years from now</h3><div class="a">
 <p>By 2031 developers direct agent fleets instead of typing code, boilerplate and the junior role quietly gone, a ten person company ships like a hundred, and the embarrassment will be having debated AI output in 2025 instead of learning to direct it, which is why my own work already runs on 24x7 agent sessions I steer and this month I am interviewing for roles where I make a whole team work that way.</p>
-</div></article>
-<article class="q" id="q17"><div class="qh"><span class="num">Q17</span><h3>Off the clock</h3></div><div class="a">
+</div><span class="meta">16 / 18</span></article>
+<article class="cell q" id="q17"><span class="cat">Question 17</span><h3 class="title">Off the clock</h3><div class="a">
 <p>For cars, I start by reading about the company and the model, what variants exist, who the competitors are at that price, whether it is manual or automatic, what features it offers, whether a service center is nearby, and what colours it comes in. Then I take a test drive and check every aspect I actually need in my car.</p>
-</div></article>
-<article class="q" id="q18"><div class="qh"><span class="num">Q18</span><h3>Hot take</h3></div><div class="a">
+</div><span class="meta">17 / 18</span></article>
+<article class="cell q" id="q18"><span class="cat">Question 18</span><h3 class="title">Hot take</h3><div class="a">
 <p>AI is bubble which i believe its wrong :)</p>
-</div></article>
-</section>
-<footer>Written by Abhisek Omkar Prasad for the BraindAI Head of AI first interview. Eighteen questions, four minutes of video, one email.</footer>
+</div><span class="meta">18 / 18</span></article>
+<footer class="cell ground close">
+<span class="cat">End</span>
+<p>Written by Abhisek Omkar Prasad for the BraindAI Head of AI first interview.</p>
+<span class="meta">18 questions · 4 minutes of video · one email</span>
+</footer>
+</div>
 </main>
 </div>
 </body>
