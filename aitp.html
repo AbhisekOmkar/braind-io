@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AITP, a better approach</title>
+<meta name="description" content="What I would do about the Bizquip problems in Braind's AITP context page.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --forest:#1B5E20; --forest-hi:#2E7D32; --lime:#C6FF00;
+  --cream:#F4F1E6; --cream-2:#EDE9DA; --cream-ink:#14201A; --cream-ink2:#5A6A5F; --cream-rule:#DBD6C4;
+  --pad:36px;
+  --ink-65:color-mix(in srgb,var(--cream-ink) 65%,transparent);
+  --ink-35:color-mix(in srgb,var(--cream-ink) 35%,transparent);
+  --ink-18:color-mix(in srgb,var(--cream-ink) 18%,transparent);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none !important}}
+body{margin:0;background:var(--cream-2);color:var(--cream-ink);font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:300;font-size:16px;line-height:1.32;
+  border-top:1px solid var(--cream-ink);border-bottom:1px solid var(--cream-ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,p,ul,ol,figure,dl,dd{margin:0}
+h1,h2,h3{font-weight:200;text-wrap:balance}
+ul,ol{padding:0;list-style:none}
+img{max-width:100%}
+a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--cream-ink);overflow-wrap:anywhere}
+a:hover{text-decoration-color:var(--ink-35)}
+a:focus-visible{outline:1px solid var(--cream-ink);outline-offset:3px}
+b,strong{font-weight:400}
+em{font-style:normal;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.12em;text-decoration-color:var(--ink-35)}
+
+/* type roles, from the study */
+.cat{font-size:16px;font-weight:300;line-height:1.32;color:var(--cream-ink2)}
+.title{font-size:38px;font-weight:200;line-height:1}
+.display{font-size:clamp(38px,4.4vw,64px);font-weight:200;line-height:1}
+.meta{font-size:16px;font-weight:300;line-height:2.37;margin-top:auto;padding-top:30px;align-self:flex-end;text-align:right;color:var(--cream-ink2)}
+.vlabel{font-size:16px;font-weight:300;line-height:2.37;color:var(--ink-65)}
+.muted{color:var(--cream-ink2)}
+
+/* frame */
+.shell{max-width:1180px;margin:0 auto;padding:0 30px 90px;display:grid;grid-template-columns:250px minmax(0,1fr);column-gap:45px}
+.rail{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;padding:45px 0 30px;scrollbar-width:thin}
+.rail .who{font-size:21px;font-weight:200;line-height:1.31}
+.rail .role{margin-top:6px}
+.rail nav{margin-top:30px;display:flex;flex-direction:column}
+.rail nav a{display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:baseline;padding:9px 0;border-top:1px solid var(--cream-rule);text-decoration:none;font-size:14px;line-height:1.32;color:var(--cream-ink2)}
+.rail nav a:last-child{border-bottom:1px solid var(--cream-rule)}
+.rail nav a:hover{color:var(--cream-ink)}
+.rail nav a.p{color:var(--cream-ink);font-weight:400;padding-top:16px}
+.rail nav a span{font-variant-numeric:tabular-nums;font-weight:300}
+.main{padding-top:45px}
+
+/* lattice */
+.lattice{display:grid;grid-template-columns:minmax(0,1fr);gap:1px;background:var(--cream-rule);border:1px solid var(--cream-rule)}
+.cell{background:var(--cream);padding:var(--pad);display:flex;flex-direction:column;min-width:0;position:relative;scroll-margin-top:24px}
+.cell>*+*{margin-top:20px}
+.cell>.title{margin-top:30px}
+.ground{background:var(--cream-2)}
+.tint{background:color-mix(in srgb,var(--forest) 16%,var(--cream))}
+
+/* masthead */
+.hero{min-height:0}
+.hero .pill{display:inline-flex;gap:10px;align-items:center;align-self:flex-start;line-height:1.32}
+.pill .dot{width:6px;height:6px;background:var(--cream-ink);display:inline-block;flex:none}
+.hero h1{padding-top:40px;font-size:clamp(38px,5vw,64px);font-weight:200;line-height:1.08;max-width:none}
+.hero h1 em{white-space:nowrap}
+.hero .foot{line-height:2.37;color:var(--cream-ink2);margin-top:30px}
+
+/* basics */
+.basics .row{display:grid;grid-template-columns:230px 1fr;gap:20px;padding:12px 0;border-top:1px solid var(--ink-18)}
+.basics .row:last-child{border-bottom:1px solid var(--ink-18)}
+.basics dt{color:var(--ink-65)}
+.basics dd{font-weight:300}
+.basics .row:nth-child(2) dd{font-weight:400}
+.papers{margin-top:0}
+.papers li{padding:8px 0;border-top:1px solid var(--cream-rule);display:grid;grid-template-columns:28px 1fr;gap:10px;font-size:15px}
+.papers li::before{counter-increment:paper;content:"0" counter(paper);color:var(--cream-ink2)}
+.papers{counter-reset:paper}
+.papers li:last-child{border-bottom:1px solid var(--cream-rule)}
+.line{margin-top:20px}
+.line a.notion{overflow-wrap:anywhere;word-break:break-all}
+.more .vlabel{margin-top:30px}
+.more .vlabel+*{margin-top:0}
+.more figure{margin-top:30px;max-width:360px}
+.more figure img{display:block;width:100%;height:auto;border:1px solid var(--ink-18)}
+
+/* parts and questions */
+.part{padding-top:60px;padding-bottom:40px}
+.part .cat{color:var(--cream-ink)}
+.part .cat::before{content:"";display:inline-block;width:14px;height:14px;background:var(--lime);border:1px solid var(--cream-ink);margin-right:12px;vertical-align:-1px}
+.part .display{margin-top:30px}
+article.q .cat{margin-top:0}
+.a{margin-top:30px;display:flex;flex-direction:column;gap:14px;max-width:66ch}
+.a p{line-height:1.45}
+.a .ab{display:inline-block;min-width:34px;font-weight:400}
+.a .vlabel{margin-top:10px;margin-bottom:-8px}
+.lines{counter-reset:line;display:flex;flex-direction:column;gap:8px}
+.lines li{display:grid;grid-template-columns:34px 1fr;gap:10px;line-height:1.45}
+.lines li::before{counter-increment:line;content:"0" counter(line);color:var(--cream-ink2);font-variant-numeric:tabular-nums}
+.lines li:nth-child(n+10)::before{content:counter(line)}
+.video{background:var(--lime);padding:12px;margin-top:10px}
+.video iframe{display:block;width:100%;aspect-ratio:4/3;border:0;background:var(--cream-ink)}
+.facts{display:flex;flex-direction:column}
+.facts li{padding:9px 0;border-top:1px solid var(--cream-rule);line-height:1.45}
+.facts li:last-child{border-bottom:1px solid var(--cream-rule)}
+.video video{display:block;width:100%;aspect-ratio:16/9;background:var(--cream-ink)}
+.cap{font-size:14px;line-height:1.45;color:var(--cream-ink2);margin-top:10px}
+.links{display:flex;flex-direction:column}
+.links li{padding:10px 0;border-top:1px solid var(--cream-rule);font-size:15px}
+.links li:last-child{border-bottom:1px solid var(--cream-rule)}
+
+/* report-style figures (How you think) */
+.thesis{font-size:30px;font-weight:300;line-height:1.15;letter-spacing:-.01em;margin:6px 0 0;max-width:24ch}
+.thesis em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;text-decoration:none;font-size:1.1em}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--cream-ink);border-bottom:1px solid var(--cream-rule);margin-top:10px}
+.tile{padding:18px 16px 16px 0;border-right:1px solid var(--cream-rule);min-width:0}
+.tile:last-child{border-right:0}
+.tile+.tile{padding-left:18px}
+.tile b{display:block;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;font-size:46px;line-height:1;color:var(--cream-ink);letter-spacing:-.01em}
+.tile b.ok{color:#5E7A12}
+.tile span{display:block;margin-top:10px;font-family:'IBM Plex Mono',ui-monospace,Consolas,monospace;font-size:12px;line-height:1.5;color:var(--cream-ink2)}
+.fig{margin:22px 0 0;border-top:1px solid var(--cream-ink);padding-top:12px}
+.fig figcaption{font-size:14px;line-height:1.45;color:var(--cream-ink2);margin-bottom:10px;max-width:70ch}
+.fig figcaption b{font-weight:400;color:var(--cream-ink)}
+.fig svg{display:block;width:100%;height:auto;border:1px solid var(--cream-rule)}
+.ledger{display:flex;flex-direction:column;border-top:1px solid var(--cream-rule)}
+.ledger li{display:grid;grid-template-columns:200px 1fr;gap:16px;padding:10px 0;border-bottom:1px solid var(--cream-rule);font-size:15px;line-height:1.4}
+.ledger li b{font-weight:400;color:var(--cream-ink)}
+.ledger li span{color:var(--cream-ink2)}
+.ledger li b::before{content:"";display:inline-block;width:9px;height:9px;background:var(--lime);border:1px solid var(--cream-ink);margin-right:12px;vertical-align:1px}
+.a .thesis+.tiles{margin-top:4px}
+
+/* the question, quoted from the BraindAI page */
+.qtext{margin-top:24px;max-width:66ch;padding:18px 22px 14px;background:var(--cream-2);border-left:2px solid var(--cream-ink)}
+.qtext .cat{display:block;margin-bottom:10px;font-size:13px}
+.qtext p{margin:0 0 10px;font-weight:300;line-height:1.45;color:var(--cream-ink)}
+.qtext p:last-child{margin-bottom:0}
+.qtext strong{font-weight:400}
+.qtext ul{list-style:disc;padding-left:1.15em;margin:0 0 10px}
+.qtext li{margin:5px 0;font-weight:300;line-height:1.45}
+.qtext .sub{display:grid;grid-template-columns:34px 1fr;gap:6px}
+.qtext .subk{color:var(--cream-ink2)}
+.qtext .vlabel{margin:6px 0 2px;line-height:1.8}
+.qtext .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:6px 0 12px}
+.qtext .stats div{background:var(--cream);border:1px solid var(--cream-rule);padding:10px 12px;min-width:0}
+.qtext .stats b{display:block;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;font-size:28px;line-height:1}
+.qtext .stats span{display:block;margin-top:4px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;color:var(--cream-ink2)}
+
+/* close */
+.close p{max-width:48ch;font-size:21px;font-weight:200;line-height:1.31}
+.close .meta{align-self:flex-start;text-align:left}
+
+@media (max-width:1100px){
+  .a{max-width:none}
+}
+@media (max-width:900px){
+  :root{--pad:26px}
+  .shell{grid-template-columns:minmax(0,1fr);padding:0 16px 60px}
+  .rail{position:static;height:auto;padding:30px 0 0}
+  .rail nav{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+  .rail nav a.p{grid-column:1/-1}
+  .main{padding-top:30px}
+  .basics .row{grid-template-columns:1fr;gap:4px}
+  .tiles{grid-template-columns:1fr}
+  .tile{border-right:0;border-bottom:1px solid var(--cream-rule);padding-left:0 !important}
+  .tile:last-child{border-bottom:0}
+  .ledger li{grid-template-columns:1fr;gap:2px}
+  .thesis{font-size:24px}
+  .qtext .stats{grid-template-columns:1fr 1fr}
+  .hero h1{max-width:100%}
+  .hero h1 em{white-space:normal}
+  .title{font-size:30px}
+}
+@media print{.rail{display:none}.shell{grid-template-columns:1fr}.cell{break-inside:avoid}.video{display:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="rail" aria-label="Contents">
+<p class="who">Abhisek Omkar Prasad</p>
+<p class="role cat">Head of AI · AITP, a better approach</p>
+<nav>
+<a class="p" href="index.html"><span>←</span>The eighteen answers</a>
+<a class="p" href="https://braindio.notion.site/AITP-Where-We-Are-Context-for-Head-of-AI-Candidates-78a2a528a7d24e19bd8bbb34ddadffa5" rel="noopener"><span>↗</span>Braind's page, the source</a>
+<a class="q" href="#s1"><span>01</span>VPN and ERP access</a>
+<a class="q" href="#s2"><span>02</span>The Intact endpoints</a>
+<a class="q" href="#s3"><span>03</span>Outlook permissions</a>
+<a class="q" href="#s4"><span>04</span>Data still migrating</a>
+<a class="q" href="#s5"><span>05</span>Company names</a>
+<a class="q" href="#s6"><span>06</span>Signal noise</a>
+<a class="q" href="#s7"><span>07</span>Missing cost data</a>
+<a class="q" href="#s8"><span>08</span>Adoption</a>
+<a class="q" href="#s9"><span>09</span>The ten-day error</a>
+</nav>
+</aside>
+<main class="main">
+<div class="lattice">
+<header class="cell ground hero" id="top">
+<span class="pill"><span class="dot" aria-hidden="true"></span>Braind · AITP where we are · September 2026</span>
+<h1>Bizquip,<br><em>done again.</em></h1>
+<p class="foot">Braind's page for candidates lists what slowed the Bizquip build and what hurt after launch. One answer for each, and where I have already done it.</p>
+</header>
+<section class="cell tint" aria-label="The numbers">
+<span class="cat">What the page says</span>
+<div class="tiles"><div class="tile"><b>418 → 49</b><span>opportunities found, opportunities acted on. 11.7% activation, 354 untouched</span></div><div class="tile"><b>10 days</b><span>a live workflow stayed broken on one bad character while the project read as delivered</span></div><div class="tile"><b class="ok">7</b><span>constraints, none of them the model: routing, endpoints, permissions, migration, names, noise, missing cost data</span></div></div>
+<p class="line">Source: <a href="https://braindio.notion.site/AITP-Where-We-Are-Context-for-Head-of-AI-Candidates-78a2a528a7d24e19bd8bbb34ddadffa5" rel="noopener">https://braindio.notion.site/AITP-Where-We-Are-Context-for-Head-of-AI-Candidates-78a2a528a7d24e19bd8bbb34ddadffa5</a></p>
+</section>
+<article class="cell q" id="s1"><span class="cat">Problem 01</span><h3 class="title">VPN routing and Intact iQ querying took longer than expected</h3><div class="a"><p class="vlabel">What happened</p><p>Getting from Braind's cloud into the client's network meant VPN routing, and querying the ERP directly was slow to set up.</p><p class="vlabel">What I would do</p><ul class="ledger"><li><b>Do not route in</b><span>put a small connector beside Intact iQ, inside the client network, that only dials out. Cloudflare Tunnel or Tailscale. No inbound port, so no firewall project.</span></li><li><b>A read API, not a database</b><span>the connector exposes customers, orders, invoices and categories as a small versioned API. The cloud never sees the ERP itself.</span></li><li><b>Copy, then query</b><span>a nightly extract into our own Postgres. Cross-sell analysis runs on the copy, so a slow ERP query is never on the critical path.</span></li><li><b>Use what the ERP offers</b><span>Intact iQ has its own REST API definitions in Setup. Define the four or five reads there and the definitions become the contract.</span></li><li><b>Heartbeat</b><span>the connector reports its last successful sync. A dead link is a red tile on the dashboard the same hour.</span></li></ul><figure class="fig"><figcaption><b>Figure 1.</b> A connector beside the ERP, an outbound-only tunnel, and a copy in the cloud to query.</figcaption><svg viewBox="0 0 1000 380" role="img" aria-label="Connector beside the ERP, outbound-only tunnel to the cloud" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#14201A"/></marker><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#5A6A5F" stroke-width="1.2"/></pattern></defs><rect width="1000" height="380" fill="#FBFAF5"/><rect x="40" y="40" width="400" height="300" rx="2" fill="#F3F8DC" stroke="#D9D4C2" stroke-width="1"/><text x="56" y="64" text-anchor="start" style="font-family:'IBM Plex Mono', ui-monospace, Consolas, monospace;font-size:11px;font-weight:500;fill:#5A6A5F;letter-spacing:.09em">CLIENT NETWORK</text><rect x="60" y="84" width="170" height="96" rx="2" fill="#FFFFFF" stroke="#D9D4C2" stroke-width="1"/><text x="74" y="108" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:14px;font-weight:500;fill:#14201A">Intact iQ</text><text x="74" y="128" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="74" dy="0">The ERP. SQL Server</tspan><tspan x="74" dy="16.56">behind it. Nobody</tspan><tspan x="74" dy="16.56">touches it directly.</tspan></text><rect x="250" y="84" width="170" height="96" rx="2" fill="#FFFFFF" stroke="#D9D4C2" stroke-width="1"/><text x="264" y="108" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:14px;font-weight:500;fill:#14201A">Connector</text><text x="264" y="128" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="264" dy="0">A small service beside</tspan><tspan x="264" dy="16.56">the ERP. Read API,</tspan><tspan x="264" dy="16.56">nightly extract,</tspan><tspan x="264" dy="16.56">heartbeat.</tspan></text><line x1="230" y1="132" x2="250" y2="132" stroke="#14201A" stroke-width="1.2" marker-end="url(#ah)"/><rect x="60" y="210" width="360" height="106" rx="2" fill="#FFFFFF" stroke="#D9D4C2" stroke-width="1"/><text x="74" y="234" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:14px;font-weight:500;fill:#14201A">Dials out only</text><text x="74" y="254" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="74" dy="0">Cloudflare Tunnel or Tailscale. No inbound port, no</tspan><tspan x="74" dy="16.56">VPN routing to set up. The firewall allows one</tspan><tspan x="74" dy="16.56">outbound connection.</tspan></text><line x1="440" y1="190" x2="560" y2="190" stroke="#14201A" stroke-width="1.4" stroke-dasharray="6 4"/><text x="500" y="178" text-anchor="middle" style="font-family:'IBM Plex Mono', ui-monospace, Consolas, monospace;font-size:11px;font-weight:500;fill:#5A6A5F;letter-spacing:.09em">OUTBOUND TUNNEL</text><line x1="560" y1="190" x2="600" y2="190" stroke="#14201A" stroke-width="1.2" marker-end="url(#ah)"/><rect x="600" y="40" width="360" height="300" rx="2" fill="#FFFFFF" stroke="#D9D4C2" stroke-width="1"/><text x="616" y="64" text-anchor="start" style="font-family:'IBM Plex Mono', ui-monospace, Consolas, monospace;font-size:11px;font-weight:500;fill:#5A6A5F;letter-spacing:.09em">BRAIND CLOUD</text><rect x="620" y="84" width="150" height="96" rx="2" fill="#FFFFFF" stroke="#D9D4C2" stroke-width="1"/><text x="634" y="108" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:14px;font-weight:500;fill:#14201A">Postgres copy</text><text x="634" y="128" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="634" dy="0">Heavy queries run</tspan><tspan x="634" dy="16.56">here, not on the</tspan><tspan x="634" dy="16.56">ERP.</tspan></text><rect x="790" y="84" width="150" height="96" rx="2" fill="#FFFFFF" stroke="#D9D4C2" stroke-width="1"/><text x="804" y="108" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:14px;font-weight:500;fill:#14201A">Cross-sell engine</text><text x="804" y="128" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="804" dy="0">Rules and matching</tspan><tspan x="804" dy="16.56">over the copy.</tspan></text><line x1="770" y1="132" x2="790" y2="132" stroke="#14201A" stroke-width="1.2" marker-end="url(#ah)"/><rect x="620" y="210" width="320" height="106" rx="2" fill="#FFFFFF" stroke="#D9D4C2" stroke-width="1"/><text x="634" y="234" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:14px;font-weight:500;fill:#14201A">Health, not hope</text><text x="634" y="254" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="634" dy="0">The heartbeat and last-successful-sync time</tspan><tspan x="634" dy="16.56">sit on the dashboard. A dead tunnel is a red</tspan><tspan x="634" dy="16.56">tile, not a surprise ten days later.</tspan></text></svg></figure><p class="vlabel">Where I have done it</p><p>Sidecar runs exactly this shape: one connector per system (an ERP connector for Odoo, a database proxy for Postgres), services talking on a private network with health checks and an explicit start-up order, secrets pulled from a cloud secret manager, and nothing exposed to the outside. Trace's records are copies in our database; the client's systems are only read through connectors.</p></div></article>
+<article class="cell q" id="s2"><span class="cat">Problem 02</span><h3 class="title">The exact Intact endpoints for order history and closed-won data were unclear</h3><div class="a"><p class="vlabel">What happened</p><p>Nobody could say which endpoint or table held order history and closed-won deals, so the build guessed and re-guessed.</p><p class="vlabel">What I would do</p><ul class="ledger"><li><b>Write the contract first</b><span>for each question the client wants answered (top customers, category history, lapsed purchases, closed-won), name the source, the field, the grain and one real example record the client vouches for.</span></li><li><b>Prove it with 20 records</b><span>pick twenty orders the client knows by heart, pull them through the contract, and score every field: matched, mismatched, missing. Fix until the score is clean.</span></li><li><b>Keep it in the repo</b><span>the contract is versioned config per client, not knowledge in one head. When the ERP changes, the check fails first.</span></li><li><b>Match in tiers</b><span>exact ID, then a stable key like customer number or email domain, then a fuzzy step with a human queue. Record which tier matched each row.</span></li></ul><p class="vlabel">Where I have done it</p><p>Trace's ERP verification does this every day: each shipment record is checked against the client's ERP leads in tiers (lead number, then customer plus port, then none), with fast deterministic matching first, a small model only for the last mile, and the matched and mismatched fields stored per record with what it cost. The per-client config file (domains, mailboxes, tracking-number patterns) is the same idea as a data contract, and the customer-service assignment on every record carries the method that matched it.</p></div></article>
+<article class="cell q" id="s3"><span class="cat">Problem 03</span><h3 class="title">Outlook and Graph permissions had to come from the client</h3><div class="a"><p class="vlabel">What happened</p><p>The build waited on the client's IT for Microsoft Graph permissions, and the wait was invisible in the plan.</p><p class="vlabel">What I would do</p><ul class="ledger"><li><b>Make the ask a product</b><span>one verified multi-tenant app and one admin-consent link. The admin clicks, signs in, and lands on a page where they tick the mailboxes in scope.</span></li><li><b>Permission per mailbox</b><span>each tick becomes one Exchange role assignment scoped to that mailbox. The app holds no tenant-wide mail permission at all.</span></li><li><b>Drafts, not sends</b><span>the engine writes into the rep&#x27;s Drafts folder. No send permission is ever requested, so the consent screen is short and the rep stays in control.</span></li><li><b>A fallback that needs no admin</b><span>if the client will not grant an app anything, per-user consent through Nylas works the same week, one link per person.</span></li><li><b>Put the dependency on the plan</b><span>consent is a named task with an owner and a date, and the build has a stub to run against until it lands.</span></li></ul><figure class="fig"><figcaption><b>Figure 2.</b> The mail path: harvester, router, agent, then a draft the rep sends.</figcaption><svg viewBox="0 0 1000 350" role="img" aria-label="From the mailbox to a draft the rep sends" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#14201A"/></marker><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#5A6A5F" stroke-width="1.2"/></pattern></defs><rect width="1000" height="350" fill="#FBFAF5"/><rect x="40" y="60" width="168" height="104" rx="2" fill="#FFFFFF" stroke="#D9D4C2" stroke-width="1"/><text x="54" y="84" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:13.5px;font-weight:500;fill:#14201A">Rep&#x27;s mailbox</text><text x="54" y="104" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="54" dy="0">Outlook, in the client</tspan><tspan x="54" dy="16.56">tenant</tspan></text><line x1="212" y1="112" x2="228" y2="112" stroke="#14201A" stroke-width="1.2" marker-end="url(#ah)"/><rect x="232" y="60" width="168" height="104" rx="2" fill="#F3F8DC" stroke="#D9D4C2" stroke-width="1"/><text x="246" y="84" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:13.5px;font-weight:500;fill:#14201A">Harvester</text><text x="246" y="104" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="246" dy="0">Graph, app-only.</tspan><tspan x="246" dy="16.56">Permission per</tspan><tspan x="246" dy="16.56">mailbox, nothing</tspan><tspan x="246" dy="16.56">tenant-wide.</tspan></text><line x1="404" y1="112" x2="420" y2="112" stroke="#14201A" stroke-width="1.2" marker-end="url(#ah)"/><rect x="424" y="60" width="168" height="104" rx="2" fill="#FFFFFF" stroke="#D9D4C2" stroke-width="1"/><text x="438" y="84" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:13.5px;font-weight:500;fill:#14201A">Router</text><text x="438" y="104" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="438" dy="0">Sends each mailbox to</tspan><tspan x="438" dy="16.56">the right agent</tspan></text><line x1="596" y1="112" x2="612" y2="112" stroke="#14201A" stroke-width="1.2" marker-end="url(#ah)"/><rect x="616" y="60" width="168" height="104" rx="2" fill="#FFFFFF" stroke="#D9D4C2" stroke-width="1"/><text x="630" y="84" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:13.5px;font-weight:500;fill:#14201A">Cross-sell agent</text><text x="630" y="104" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="630" dy="0">Writes a draft, never</tspan><tspan x="630" dy="16.56">sends</tspan></text><line x1="788" y1="112" x2="804" y2="112" stroke="#14201A" stroke-width="1.2" marker-end="url(#ah)"/><rect x="808" y="60" width="168" height="104" rx="2" fill="#FFFFFF" stroke="#D9D4C2" stroke-width="1"/><text x="822" y="84" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:13.5px;font-weight:500;fill:#14201A">Drafts folder</text><text x="822" y="104" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="822" dy="0">The rep opens it,</tspan><tspan x="822" dy="16.56">edits, sends</tspan></text><line x1="40" y1="200" x2="960" y2="200" stroke="#E9E5D8" stroke-width="1"/><text x="40" y="226" text-anchor="start" style="font-family:'IBM Plex Mono', ui-monospace, Consolas, monospace;font-size:11px;font-weight:500;fill:#5A6A5F;letter-spacing:.09em">WHAT THE CLIENT IS ASKED FOR</text><text x="40" y="250" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:13px;font-weight:400;fill:#5A6A5F"><tspan x="40" dy="0">One admin-consent link for a verified app. Then the admin ticks the mailboxes in scope; each tick becomes one</tspan><tspan x="40" dy="18.849999999999998">per-mailbox role assignment. No send permission is requested, because the rep sends. If the client will not</tspan><tspan x="40" dy="18.849999999999998">grant an app anything, per-user consent through Nylas is the fallback, and it needs no admin at all.</tspan></text></svg></figure><p class="vlabel">Where I have done it</p><p>Sidecar started on Nylas, with per-user consent links, webhooks and a router that forwards each mailbox to the right agent. Then we built email-harvester in-house: Graph app-only auth, zero mail permissions on the app registration, one role assignment per mailbox, an admin consent link and a chooser page, notifications plus delta sync plus a two-hourly reconcile, and a drift detector that catches the one setting that silently widens access. It runs 70-plus mailboxes across nine customers.</p></div></article>
+<article class="cell q" id="s4"><span class="cat">Problem 04</span><h3 class="title">Recent data was still being migrated, so newer figures looked incomplete</h3><div class="a"><p class="vlabel">What happened</p><p>The numbers for recent months looked low because the data behind them had not all arrived yet.</p><p class="vlabel">What I would do</p><ul class="ledger"><li><b>Watermark every dataset</b><span>each source carries &quot;complete up to&quot; a date, and every number is published with it. Queries stop at the watermark.</span></li><li><b>Count against the source</b><span>rows per month here against rows per month there. A short month turns red before anyone reads a chart.</span></li><li><b>Trend beside the average</b><span>never show a cumulative average alone. The monthly line goes next to it, so a fall cannot hide.</span></li></ul><p class="vlabel">Where I have done it</p><p>Trace's records carry a watermark of how many messages are folded in, evaluation replays use a time cutoff so the system cannot see the future, and a completeness check is what found 21% of customer requests were never being traced. Braind's own CWSI note, where a cumulative average hid a falling lead count, is the same lesson.</p></div></article>
+<article class="cell q" id="s5"><span class="cat">Problem 05</span><h3 class="title">Inconsistent company names created duplicates and matching problems</h3><div class="a"><p class="vlabel">What happened</p><p>The same customer appeared under several spellings, so matching produced duplicates and missed links.</p><p class="vlabel">What I would do</p><ul class="ledger"><li><b>Stable keys first</b><span>customer number, email domain, company registration or VAT number. Names come last.</span></li><li><b>Then normalise</b><span>strip Ltd, Limited, PLC and friends, expand abbreviations, drop punctuation, keep an alias table so each decision is made once.</span></li><li><b>Then a queue, not a guess</b><span>the fuzzy leftovers go to a person with both records side by side. Never merge two companies on a name alone.</span></li><li><b>Report it</b><span>duplicate rate is a number on the dashboard, with the worst offenders listed.</span></li></ul><p class="vlabel">Where I have done it</p><p>Trace's customer matching uses the email domain as the primary key, a name normaliser for the rest, and a matcher for ERP organisations that tries deterministic layers before a small model. The hard lesson was a merge on a weak identifier that put two customers on one shipment record; the fix was to refuse when the evidence is ambiguous, because a refusal is cheaper than a wrong merge.</p></div></article>
+<article class="cell q" id="s6"><span class="cat">Problem 06</span><h3 class="title">Some signals needed de-duplication and stronger geographic gating</h3><div class="a"><p class="vlabel">What happened</p><p>External signals such as website visits, funding news and "same building" arrived noisy and repeated, so the queue filled with the same thing.</p><p class="vlabel">What I would do</p><ul class="ledger"><li><b>Fingerprint every signal</b><span>company, type, source and time bucket. A repeat is dropped, not shown twice.</span></li><li><b>Hard gates</b><span>a distance rule for nearby signals and a confidence score for the rest. One signal per company per day.</span></li><li><b>Test before you switch on</b><span>label a hundred signals by hand, measure precision per source, and every source has a kill switch.</span></li></ul><p class="vlabel">Where I have done it</p><p>Trace de-duplicates three ways (message ID, the RFC message ID across mailboxes, and a content fingerprint), and the nightly memory sweep uses fingerprints and a significance score so only meaningful changes cost a model call. Braind's Tecknuovo note, where real data produced a mountain of duplicate signals, is the same problem.</p></div></article>
+<article class="cell q" id="s7"><span class="cat">Problem 07</span><h3 class="title">Industry and margin questions could not be answered because cost data was not available</h3><div class="a"><p class="vlabel">What happened</p><p>The "Ask the OS" layer was asked about margins, but the cost data behind margins had not arrived.</p><p class="vlabel">What I would do</p><ul class="ledger"><li><b>Say what you do not know</b><span>every answer carries its source, and &quot;not available&quot; is a real value the user sees, not a guess.</span></li><li><b>Stage the questions</b><span>revenue-only answers now, margin answers on the day cost data lands, with that date shown.</span></li><li><b>Refuse with a reason</b><span>an assistant that cannot answer should say which data is missing and who owns it.</span></li></ul><p class="vlabel">Where I have done it</p><p>Trace's extraction records where each fact came from (the email body, a registry, memory), and the worst incident in that system was a remembered value filling a field the customer never stated. The fix was to make a gap a gap: a missing field stays missing and gets asked, never filled from a guess.</p></div></article>
+<article class="cell q" id="s8"><span class="cat">Problem 08</span><h3 class="title">The engine found 418 opportunities and 49 were acted on</h3><div class="a"><p class="vlabel">What happened</p><p>The system produced insight, and 354 opportunities sat untouched. Insight did not become behaviour.</p><p class="vlabel">What I would do</p><ul class="ledger"><li><b>Make activation the metric</b><span>acted-on rate sits on the dashboard next to opportunities found, from day one.</span></li><li><b>Owner and due date</b><span>every opportunity has a rep and a date, and the untouched ones go to the sales lead weekly, by name.</span></li><li><b>Meet the rep where they work</b><span>a ready draft in their Outlook Drafts and a nudge in Teams. The dashboard is the record, not the workplace.</span></li><li><b>Log every action</b><span>sent, edited, dismissed, and the edits themselves. That stream re-ranks next week&#x27;s queue and is the roadmap.</span></li></ul><figure class="fig"><figcaption><b>Figure 3.</b> The activation loop. The untouched pile has an owner.</figcaption><svg viewBox="0 0 1000 250" role="img" aria-label="The activation loop" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#14201A"/></marker><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#5A6A5F" stroke-width="1.2"/></pattern></defs><rect width="1000" height="250" fill="#FBFAF5"/><rect x="40" y="60" width="136" height="96" rx="2" fill="#FFFFFF" stroke="#D9D4C2" stroke-width="1"/><text x="54" y="84" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:13.5px;font-weight:500;fill:#14201A">Found</text><text x="54" y="104" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="54" dy="0">The engine spots a</tspan><tspan x="54" dy="16.56">gap</tspan></text><line x1="180" y1="108" x2="196" y2="108" stroke="#14201A" stroke-width="1.2" marker-end="url(#ah)"/><rect x="197" y="60" width="136" height="96" rx="2" fill="#FFFFFF" stroke="#D9D4C2" stroke-width="1"/><text x="211" y="84" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:13.5px;font-weight:500;fill:#14201A">Owned</text><text x="211" y="104" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="211" dy="0">A rep and a due</tspan><tspan x="211" dy="16.56">date</tspan></text><line x1="337" y1="108" x2="353" y2="108" stroke="#14201A" stroke-width="1.2" marker-end="url(#ah)"/><rect x="354" y="60" width="136" height="96" rx="2" fill="#FFFFFF" stroke="#D9D4C2" stroke-width="1"/><text x="368" y="84" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:13.5px;font-weight:500;fill:#14201A">Placed</text><text x="368" y="104" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="368" dy="0">Draft in Outlook,</tspan><tspan x="368" dy="16.56">nudge in Teams</tspan></text><line x1="494" y1="108" x2="510" y2="108" stroke="#14201A" stroke-width="1.2" marker-end="url(#ah)"/><rect x="511" y="60" width="136" height="96" rx="2" fill="#F3F8DC" stroke="#D9D4C2" stroke-width="1"/><text x="525" y="84" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:13.5px;font-weight:500;fill:#14201A">Acted</text><text x="525" y="104" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="525" dy="0">Sent, edited or</tspan><tspan x="525" dy="16.56">dismissed</tspan></text><line x1="651" y1="108" x2="667" y2="108" stroke="#14201A" stroke-width="1.2" marker-end="url(#ah)"/><rect x="668" y="60" width="136" height="96" rx="2" fill="#FFFFFF" stroke="#D9D4C2" stroke-width="1"/><text x="682" y="84" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:13.5px;font-weight:500;fill:#14201A">Logged</text><text x="682" y="104" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="682" dy="0">Every action</tspan><tspan x="682" dy="16.56">recorded</tspan></text><line x1="808" y1="108" x2="824" y2="108" stroke="#14201A" stroke-width="1.2" marker-end="url(#ah)"/><rect x="825" y="60" width="136" height="96" rx="2" fill="#FFFFFF" stroke="#D9D4C2" stroke-width="1"/><text x="839" y="84" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:13.5px;font-weight:500;fill:#14201A">Ranked</text><text x="839" y="104" text-anchor="start" style="font-family:Inter, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:400;fill:#5A6A5F"><tspan x="839" dy="0">Next week starts</tspan><tspan x="839" dy="16.56">with what works</tspan></text><line x1="958" y1="156" x2="958" y2="200" stroke="#14201A" stroke-width="1.2"/><line x1="958" y1="200" x2="108" y2="200" stroke="#14201A" stroke-width="1.2"/><line x1="108" y1="200" x2="108" y2="160" stroke="#14201A" stroke-width="1.2" marker-end="url(#ah)"/><text x="500" y="222" text-anchor="middle" style="font-family:'IBM Plex Mono', ui-monospace, Consolas, monospace;font-size:11px;font-weight:500;fill:#5A6A5F;letter-spacing:.09em">UNTOUCHED FOR SEVEN DAYS GOES TO THE SALES LEAD, BY NAME</text></svg></figure><p class="vlabel">Where I have done it</p><p>Nothing in Sidecar sends itself: every output is a draft card a person approves or edits, and every edit is logged and used as the test set. The rule that came out of a silent failure, alert on absence and not only on errors, applies here too: an opportunity nobody touched for a week is a signal, not a row. Braind's Tecknuovo users asked for the same thing when they wanted the intelligence inside Slack.</p></div></article>
+<article class="cell q" id="s9"><span class="cat">Problem 09</span><h3 class="title">A Unicode error kept the live workflow broken for about ten days</h3><div class="a"><p class="vlabel">What happened</p><p>The email generation step failed repeatedly on a bad character, while the project was still described as delivered.</p><p class="vlabel">What I would do</p><ul class="ledger"><li><b>Alert on silence</b><span>a check that counts outputs per day and pages someone when the count is zero. Errors are loud; absence is what kills.</span></li><li><b>Clean at the boundary</b><span>strip control characters and bad encodings before anything is saved or sent. Cheap, and it never happens twice.</span></li><li><b>One definition of done</b><span>&quot;delivered&quot; means the client can see the result in their own system, not that our dashboard is green.</span></li><li><b>Errors get an owner</b><span>every failure lands in a ticket with a name on it, and the weekly review starts from the open ones.</span></li></ul><p class="vlabel">Where I have done it</p><p>Trace saw six saves fail on a stray NUL byte and now strips them before every write. Cost and volume are instrumented like correctness, because the worst failures throw no error: that is how a runaway loop and 21% of silently dropped replies were caught. Sidecar's engine turns logs, traces and error reports into ranked incidents with a draft fix attached, so a ten-day-old failure cannot sit unowned.</p></div></article>
+<section class="cell" aria-label="What I would build first">
+<span class="cat">What I would build first</span>
+<h3 class="title">Five things, reused on every client</h3>
+<div class="a"><ul class="ledger"><li><b>The connector kit</b><span>tunnel, read API, nightly copy, heartbeat. Reused on every client with an on-premise system.</span></li><li><b>The data contract</b><span>per client, in the repo, proved against twenty real records before the first feature.</span></li><li><b>The permission product</b><span>one consent link, per-mailbox scope, drafts not sends. Consent becomes a dated task, not a wait.</span></li><li><b>The activation loop</b><span>owner, due date, draft where the rep works, every action logged, untouched work escalated.</span></li><li><b>One definition of done</b><span>the client&#x27;s own system is the scoreboard, and silence pages someone.</span></li></ul></div>
+</section>
+<footer class="cell ground close">
+<span class="cat">Sources</span>
+<ul class="links"><li><a href="https://intactiqhub.com/manuals/general/rest-api/" rel="noopener">Intact iQ REST API, the vendor manual</a></li><li><a href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/cloudflared" rel="noopener">Cloudflare Tunnel, private network connectivity with cloudflared</a></li><li><a href="https://learn.microsoft.com/en-us/graph/permissions-reference" rel="noopener">Microsoft Graph permissions reference</a></li><li><a href="https://office365itpros.com/2026/02/17/mail-send-rbac-for-applications/" rel="noopener">Scoping application mail access with Exchange RBAC</a></li><li><a href="https://braindio.notion.site/AITP-Where-We-Are-Context-for-Head-of-AI-Candidates-78a2a528a7d24e19bd8bbb34ddadffa5" rel="noopener">Braind's page, AITP: where we are</a></li></ul>
+<span class="meta">Written for the BraindAI Head of AI conversation · <a href="index.html">back to the eighteen answers</a></span>
+</footer>
+</div>
+</main>
+</div>
+</body>
+</html>
